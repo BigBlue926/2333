@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.stusystem.dao.SysUserTaskConMapper">
+  <resultMap id="BaseResultMap" type="com.example.stusystem.model.SysUserTaskCon">
+    <result column="stu_user_id" jdbcType="INTEGER" property="stuUserId" />
+    <result column="study_task_id" jdbcType="INTEGER" property="studyTaskId" />
+    <result column="is_part" jdbcType="CHAR" property="isPart" />
+    <result column="is_finish" jdbcType="CHAR" property="isFinish" />
+    <result column="rate" jdbcType="REAL" property="rate" />
+    <result column="learn_ip" jdbcType="VARCHAR" property="learnIp" />
+    <result column="have_learn_time" jdbcType="TIMESTAMP" property="haveLearnTime" />
+    <result column="task_note_id" jdbcType="INTEGER" property="taskNoteId" />
+  </resultMap>
+  <insert id="insert" parameterType="com.example.stusystem.model.SysUserTaskCon">
+    insert into sys_user_task_con (stu_user_id, study_task_id, is_part, 
+      is_finish, rate, learn_ip, 
+      have_learn_time, task_note_id)
+    values (#{stuUserId,jdbcType=INTEGER}, #{studyTaskId,jdbcType=INTEGER}, #{isPart,jdbcType=CHAR}, 
+      #{isFinish,jdbcType=CHAR}, #{rate,jdbcType=REAL}, #{learnIp,jdbcType=VARCHAR}, 
+      #{haveLearnTime,jdbcType=TIMESTAMP}, #{taskNoteId,jdbcType=INTEGER})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select stu_user_id, study_task_id, is_part, is_finish, rate, learn_ip, have_learn_time, 
+    task_note_id
+    from sys_user_task_con
+  </select>
+</mapper>

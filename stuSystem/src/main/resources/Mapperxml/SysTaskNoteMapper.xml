@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.stusystem.dao.SysTaskNoteMapper">
+  <resultMap id="BaseResultMap" type="com.example.stusystem.model.SysTaskNote">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="note_power" jdbcType="INTEGER" property="notePower" />
+    <result column="notes" jdbcType="LONGVARCHAR" property="notes" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_task_note
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.stusystem.model.SysTaskNote">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_task_note (time, note_power, notes
+      )
+    values (#{time,jdbcType=TIMESTAMP}, #{notePower,jdbcType=INTEGER}, #{notes,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.stusystem.model.SysTaskNote">
+    update sys_task_note
+    set time = #{time,jdbcType=TIMESTAMP},
+      note_power = #{notePower,jdbcType=INTEGER},
+      notes = #{notes,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, time, note_power, notes
+    from sys_task_note
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, time, note_power, notes
+    from sys_task_note
+  </select>
+</mapper>

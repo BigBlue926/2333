@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.stusystem.dao.SysTchMaterialsMapper">
+  <resultMap id="BaseResultMap" type="com.example.stusystem.model.SysTchMaterials">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="autor" jdbcType="VARCHAR" property="autor" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="view_num" jdbcType="INTEGER" property="viewNum" />
+    <result column="dep_id" jdbcType="INTEGER" property="depId" />
+    <result column="cover" jdbcType="VARCHAR" property="cover" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_tch_materials
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.stusystem.model.SysTchMaterials">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_tch_materials (name, unit, autor, 
+      date, view_num, dep_id, 
+      cover, score)
+    values (#{name,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{autor,jdbcType=VARCHAR}, 
+      #{date,jdbcType=DATE}, #{viewNum,jdbcType=INTEGER}, #{depId,jdbcType=INTEGER}, 
+      #{cover,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.stusystem.model.SysTchMaterials">
+    update sys_tch_materials
+    set name = #{name,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      autor = #{autor,jdbcType=VARCHAR},
+      date = #{date,jdbcType=DATE},
+      view_num = #{viewNum,jdbcType=INTEGER},
+      dep_id = #{depId,jdbcType=INTEGER},
+      cover = #{cover,jdbcType=VARCHAR},
+      score = #{score,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, name, unit, autor, date, view_num, dep_id, cover, score
+    from sys_tch_materials
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, name, unit, autor, date, view_num, dep_id, cover, score
+    from sys_tch_materials
+  </select>
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace=".dao.SysMaterialsNoteMapper">
+  <resultMap id="BaseResultMap" type=".model.SysMaterialsNote">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="notes_power_id" jdbcType="INTEGER" property="notesPowerId" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="notes" jdbcType="LONGVARCHAR" property="notes" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_materials_note
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType=".model.SysMaterialsNote">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_materials_note (notes_power_id, time, notes
+      )
+    values (#{notesPowerId,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{notes,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType=".model.SysMaterialsNote">
+    update sys_materials_note
+    set notes_power_id = #{notesPowerId,jdbcType=INTEGER},
+      time = #{time,jdbcType=TIMESTAMP},
+      notes = #{notes,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, notes_power_id, time, notes
+    from sys_materials_note
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, notes_power_id, time, notes
+    from sys_materials_note
+  </select>
+</mapper>

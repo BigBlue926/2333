@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace=".dao.SysCoursewareMapper">
+  <resultMap id="BaseResultMap" type=".model.SysCourseware">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="view_num" jdbcType="INTEGER" property="viewNum" />
+    <result column="train_id" jdbcType="INTEGER" property="trainId" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_courseware
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType=".model.SysCourseware">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_courseware (name, unit, author, 
+      time, view_num, train_id, 
+      score)
+    values (#{name,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
+      #{time,jdbcType=TIMESTAMP}, #{viewNum,jdbcType=INTEGER}, #{trainId,jdbcType=INTEGER}, 
+      #{score,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType=".model.SysCourseware">
+    update sys_courseware
+    set name = #{name,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      view_num = #{viewNum,jdbcType=INTEGER},
+      train_id = #{trainId,jdbcType=INTEGER},
+      score = #{score,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, name, unit, author, time, view_num, train_id, score
+    from sys_courseware
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, name, unit, author, time, view_num, train_id, score
+    from sys_courseware
+  </select>
+</mapper>

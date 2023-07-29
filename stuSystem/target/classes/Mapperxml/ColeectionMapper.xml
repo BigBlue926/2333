@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace=".dao.ColeectionMapper">
+  <resultMap id="BaseResultMap" type=".model.Coleection">
+    <result column="material_id" jdbcType="INTEGER" property="materialId" />
+    <result column="couserware_id" jdbcType="INTEGER" property="couserwareId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+  <insert id="insert" parameterType=".model.Coleection">
+    insert into coleection (material_id, couserware_id, user_id
+      )
+    values (#{materialId,jdbcType=INTEGER}, #{couserwareId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}
+      )
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select material_id, couserware_id, user_id
+    from coleection
+  </select>
+</mapper>

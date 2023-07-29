@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.stusystem.dao.StuUserMapper">
+  <resultMap id="BaseResultMap" type="com.example.stusystem.model.StuUser">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="stu_number" jdbcType="VARCHAR" property="stuNumber" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="gender" jdbcType="CHAR" property="gender" />
+    <result column="office_id" jdbcType="INTEGER" property="officeId" />
+    <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+    <result column="id_card" jdbcType="VARCHAR" property="idCard" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="post_id" jdbcType="INTEGER" property="postId" />
+    <result column="postlevel_id" jdbcType="INTEGER" property="postlevelId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from stu_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.stusystem.model.StuUser">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into stu_user (stu_number, name, password, 
+      gender, office_id, birthday, 
+      id_card, telephone, post_id, 
+      postlevel_id)
+    values (#{stuNumber,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=CHAR}, #{officeId,jdbcType=INTEGER}, #{birthday,jdbcType=TIMESTAMP}, 
+      #{idCard,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{postId,jdbcType=INTEGER}, 
+      #{postlevelId,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.stusystem.model.StuUser">
+    update stu_user
+    set stu_number = #{stuNumber,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=CHAR},
+      office_id = #{officeId,jdbcType=INTEGER},
+      birthday = #{birthday,jdbcType=TIMESTAMP},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      post_id = #{postId,jdbcType=INTEGER},
+      postlevel_id = #{postlevelId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, stu_number, name, password, gender, office_id, birthday, id_card, telephone, 
+    post_id, postlevel_id
+    from stu_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, stu_number, name, password, gender, office_id, birthday, id_card, telephone, 
+    post_id, postlevel_id
+    from stu_user
+  </select>
+</mapper>

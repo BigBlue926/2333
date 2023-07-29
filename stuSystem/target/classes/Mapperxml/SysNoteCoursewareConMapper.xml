@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace=".dao.SysNoteCoursewareConMapper">
+  <resultMap id="BaseResultMap" type=".model.SysNoteCoursewareCon">
+    <result column="note_id" jdbcType="INTEGER" property="noteId" />
+    <result column="courseware_id" jdbcType="INTEGER" property="coursewareId" />
+  </resultMap>
+  <insert id="insert" parameterType=".model.SysNoteCoursewareCon">
+    insert into sys_note_courseware_con (note_id, courseware_id)
+    values (#{noteId,jdbcType=INTEGER}, #{coursewareId,jdbcType=INTEGER})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select note_id, courseware_id
+    from sys_note_courseware_con
+  </select>
+</mapper>
